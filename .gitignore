@@ -1,0 +1,20 @@
+.metadata/
+target/
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+
+# Reports
+test-output/
+reports/
+screenshots/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
