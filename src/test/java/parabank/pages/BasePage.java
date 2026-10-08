@@ -43,7 +43,7 @@ public class BasePage {
 			driver.get(URL);
 			
 			LOGGER.info(Messages.ACCESS_URL_OK.getMessage(URL));
-		} catch(Exception e) {
+		} catch (Exception e) {
 			String message = Messages.ACCESS_URL_ERROR.getMessage(URL);
 			
 			LOGGER.error(message, e);
@@ -59,9 +59,9 @@ public class BasePage {
 			elementClickable.click();
 			
 			LOGGER.info(Messages.CLICK_ELEMENT_OK.getMessage(name));
-		} catch(AutomationException e) {
+		} catch (AutomationException e) {
 			throw e;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			String message = Messages.CLICK_ELEMENT_ERROR.getMessage(name);
 			
 			LOGGER.error(message, e);
@@ -79,9 +79,9 @@ public class BasePage {
 			elementClickable.sendKeys(text);
 			
 			LOGGER.info(Messages.TYPE_OK.getMessage(text, name));
-		} catch(AutomationException e) {
+		} catch (AutomationException e) {
 			throw e;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			String message = Messages.TYPE_ERROR.getMessage(name);
 			
 			LOGGER.error(message, e);
@@ -98,9 +98,9 @@ public class BasePage {
 			LOGGER.info(Messages.GET_TEXT_OK.getMessage(name));
 			
 			return text;
-		} catch(AutomationException e) {
+		} catch (AutomationException e) {
 			throw e;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			String message = Messages.GET_TEXT_ERROR.getMessage(name);
 			
 			LOGGER.error(message, e);
@@ -117,9 +117,9 @@ public class BasePage {
 			LOGGER.info(Messages.GET_ATTRIBUTE_OK.getMessage(name));
 
 			return elementAttribute;
-		} catch(AutomationException e) {
+		} catch (AutomationException e) {
 			throw e;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			String message = Messages.GET_ATTRIBUTE_ERROR.getMessage(name);
 			
 			LOGGER.error(message, e);
@@ -134,7 +134,7 @@ public class BasePage {
 			WebElement elementClickable = shortWait.until(ExpectedConditions.elementToBeClickable(element));
 			
 			return elementClickable;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw handleWaitException(name, e);
 		}
 	}
@@ -144,7 +144,7 @@ public class BasePage {
 			WebElement elementVisible = shortWait.until(ExpectedConditions.visibilityOf(element));
 			
 			return elementVisible;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw handleWaitException(name, e);
 		}
 	}
@@ -160,7 +160,7 @@ public class BasePage {
 	protected void elementToBeSelected(WebElement element, String name) {
 		try {
 			shortWait.until(ExpectedConditions.elementToBeSelected(element));
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw handleWaitException(name, e);
 		}
 	}
@@ -170,7 +170,7 @@ public class BasePage {
 			Alert alert = shortWait.until(ExpectedConditions.alertIsPresent());
 			
 			return alert;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw handleWaitException(name, e);
 		}
 	}

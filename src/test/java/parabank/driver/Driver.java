@@ -31,7 +31,7 @@ public class Driver {
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
 		} else if (os.contains("win")) {
-			System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chromedriver/152/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chromedriver/154/chromedriver.exe");
             
             options.addArguments("--start-maximized");
 		}

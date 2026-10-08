@@ -2,6 +2,7 @@ package parabank.data;
 
 import org.testng.annotations.DataProvider;
 
+import parabank.utils.DataUtils;
 import parabank.utils.ExcelUtils;
 
 import java.io.File;
@@ -14,8 +15,7 @@ public class Data {
         + File.separator + "src" 
         + File.separator + "test" 
         + File.separator + "resources" 
-        + File.separator + "data"
-        + File.separator + "test";
+        + File.separator + "data";
 
     /*** METHODS ***/
     // Read Excel
@@ -57,10 +57,12 @@ public class Data {
         List<Object[]> registerData = new ArrayList<>();
 
         for (Object[] row : excelData) {
+        	
+        	String username = DataUtils.resolveUsername((String) row[9]);
+        	
+            RegisterData dataCase = new RegisterData((String) row[0], (String) row[1], (String) row[2], (String) row[3], (String) row[4], (String) row[5], (String) row[6], (String) row[7], (String) row[8], username, (String) row[10], (String) row[11]);
 
-            RegisterData data = new RegisterData((String) row[0], (String) row[1]);
-
-            registerData.add(new Object[] {data});
+            registerData.add(new Object[] {dataCase});
         }
 
         return registerData.toArray(new Object[0][]);

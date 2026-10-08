@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <appender name="CONSOLE"
+              class="ch.qos.logback.core.ConsoleAppender">
+
+        <encoder>
+            <pattern>
+                %d{HH:mm:ss.SSS} [%level] %logger{36} -- %msg%n
+            </pattern>
+        </encoder>
+
+    </appender>
+
+    <!-- Logs propios -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <!-- Librerías que no queremos en Logback -->
+    <logger name="org.testng" level="OFF"/>
+    <logger name="org.openqa.selenium" level="OFF"/>
+    <logger name="org.asynchttpclient" level="OFF"/>
+    <logger name="io.netty" level="OFF"/>
+
+</configuration>

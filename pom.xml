@@ -11,7 +11,7 @@
   	<dependency>
     	<groupId>org.seleniumhq.selenium</groupId>
     	<artifactId>selenium-java</artifactId>
-    	<version>4.10.0</version>
+    	<version>4.50.0</version>
   	</dependency>
 
 	<!-- TestNG -->
@@ -31,15 +31,15 @@
 
 	<!-- Data -->
 	<dependency>
-		<groupId>org.apache.poi</groupId>
-		<artifactId>poi</artifactId>
-		<version>5.2.3</version>
+    	<groupId>org.apache.poi</groupId>
+    	<artifactId>poi</artifactId>
+    	<version>5.2.3</version>
 	</dependency>
 
 	<dependency>
-		<groupId>org.apache.poi</groupId>
-		<artifactId>poi-ooxml</artifactId>
-		<version>5.2.3</version>
+    	<groupId>org.apache.poi</groupId>
+    	<artifactId>poi-ooxml</artifactId>
+    	<version>5.2.3</version>
 	</dependency>
 	
 	<!-- Awaitility -->
@@ -63,21 +63,12 @@
         <artifactId>logback-classic</artifactId>
         <version>1.5.18</version>
     </dependency>
+    
+    <!-- Log4j -->
+    <dependency>
+   		<groupId>org.apache.logging.log4j</groupId>
+    	<artifactId>log4j-core</artifactId>
+    	<version>2.18.0</version>
+	</dependency>
   </dependencies>
-  
-  <!-- Maven Surefire-->
-  <build>
-  	<plugins>
-    	<plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.2.5</version>
-            <configuration>
-                <suiteXmlFiles>
-                    <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
-                </suiteXmlFiles>
-            </configuration>
-        </plugin>
-    </plugins>
-  </build>
 </project>

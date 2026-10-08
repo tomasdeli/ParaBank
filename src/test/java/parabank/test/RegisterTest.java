@@ -45,9 +45,7 @@ public class RegisterTest {
 	// Test Pre-Config
 	@BeforeMethod
 	public void configurateTest() throws MalformedURLException {
-		LOGGER.info("\n\n*****************");
-		LOGGER.info("*****************");
-		LOGGER.info("\n*** INICIANDO CONFIGURACIÓN DE PRUEBA ***");
+		LOGGER.info("\n\n*** INICIANDO CONFIGURACIÓN DE PRUEBA ***");
 		
 		driver = new Driver();
 		driver.configurate();
@@ -60,44 +58,60 @@ public class RegisterTest {
 		
 		indexPage.navigateToIndexPage();
 		
-		LOGGER.info("\n*** FINALIZANDO CONFIGURACIÓN DE PRUEBA ***");
-		LOGGER.info("\n*****************");
-		LOGGER.info("*****************");
+		LOGGER.info("\n*** FINALIZANDO CONFIGURACIÓN DE PRUEBA ***\n");
 	}
 	
 	// Tests
 	@Test(dataProvider = "RegisterData", dataProviderClass = Data.class, priority = 1)
 	public void registerTest(RegisterData data) {
 		ExtentTest test = report.createTest("Register Test - " + data.getTestCase());
-	    SoftAssert softAssert = new SoftAssert();
+		SoftAssert softAssert = new SoftAssert();
 		
-		LOGGER.info(Messages.TEST_START.getMessage("REGISTRO - " + data.getTestCase()));
-		test.log(Status.INFO, Messages.TEST_START.getMessage("REGISTRO - " + data.getTestCase()));
-		
-		validateData(data);
-		
-		LOGGER.info("\n\n*****************");
-		LOGGER.info("*****************");
-		LOGGER.info("\n*** INICIANDO REGISTRO ***");
-		
-		loginPage.clickRegisterButton();
-		
-		registerPage.register(data.getFirstName());
-		
-		LOGGER.info("\n*** FINALIZANDO REGISTRO ***");
-		LOGGER.info("\n*****************");
-		LOGGER.info("*****************");
-		
-//		softAssert.assertTrue(true, Messages.MESSAGE.getMessage());
-//		softAssert.assertAll();
-		
-		LOGGER.info(Messages.TEST_FINISH.getMessage("REGISTRO - " + data.getTestCase()));
-		test.log(Status.INFO, Messages.TEST_FINISH.getMessage("REGISTRO - " + data.getTestCase()));
-		test.pass(Messages.TEST_SUCCESSFULLY.getMessage("REGISTRO - " + data.getTestCase()));
+		try {
+			LOGGER.info(Messages.TEST_START.getMessage("REGISTRO - " + data.getTestCase()));
+			test.log(Status.INFO, Messages.TEST_START.getMessage("REGISTRO - " + data.getTestCase()));
+			
+			validateData(data);
+			
+			LOGGER.info("\n\n*** INICIANDO REGISTRO ***");
+			
+			loginPage.clickRegisterButton();
+			
+			registerPage.register(data.getFirstName(), data.getLastName(), data.getAddress(), data.getCity(), data.getState(), data.getZIPCode(), data.getPhoneNumber(), data.getSSN(), data.getUsername(), data.getPassword(), data.getPasswordConfirm());
+			
+			LOGGER.info("\n*** FINALIZANDO REGISTRO ***\n");
+			test.log(Status.INFO, Messages.REGISTER_COMPLETED.getMessage());
+			
+			String expectedWelcomeTitle = "Welcome " + data.getUsername();
+			String expectedRegistrationSuccessMessage = "Your account was created successfully. You are now logged in.";
+			
+			softAssert.assertTrue(registerPage.isWelcomeTitleVisible(), Messages.REGISTER_PAGE_WELCOME_TITLE_NOT_VISIBLE.getMessage(data.getTestCase()));
+			softAssert.assertEquals(registerPage.getWelcomeTitleText(), expectedWelcomeTitle, Messages.REGISTER_PAGE_WELCOME_TITLE_TEXT_MISMATCH.getMessage(expectedWelcomeTitle));
+			softAssert.assertTrue(registerPage.isRegistrationSuccessMessageVisible(), Messages.REGISTER_PAGE_REGISTRATION_SUCCESS_MESSAGE_NOT_VISIBLE.getMessage(data.getTestCase()));
+			softAssert.assertEquals(registerPage.getRegistrationSuccessMessageText(), expectedRegistrationSuccessMessage, Messages.REGISTER_PAGE_REGISTRATION_SUCCESS_MESSAGE_TEXT_MISMATCH.getMessage(expectedRegistrationSuccessMessage));
+			softAssert.assertAll();
+			
+			LOGGER.info(Messages.TEST_ASSERT_PASSED.getMessage("REGISTRO - " + data.getTestCase()));
+			test.log(Status.INFO, Messages.TEST_ASSERT_PASSED.getMessage("REGISTRO - " + data.getTestCase()));
+			test.pass(Messages.TEST_SUCCESSFULLY.getMessage("REGISTRO - " + data.getTestCase()));
+		} catch (AssertionError e) {
+			LOGGER.error(Messages.TEST_ASSERT_FAILED.getMessage(data.getTestCase()), e);
+			
+	        test.fail(e);
+	        
+	        throw e;
+		} catch (Exception e) {
+			LOGGER.error(Messages.TEST_UNEXPECTED_ERROR.getMessage(data.getTestCase()), e);
+			
+	        test.fail(e);
+	        throw e;
+		} finally {
+			LOGGER.info(Messages.TEST_FINISH.getMessage("REGISTRO - " + data.getTestCase()));
+			test.log(Status.INFO, Messages.TEST_FINISH.getMessage("REGISTRO - " + data.getTestCase()));
+		}
 	}
 	
 	 private void validateData(RegisterData data) {
-
 	        if (data == null) {
 	        	String message = Messages.TEST_TOTAL_DATA_NULL.getMessage();
 	        	
