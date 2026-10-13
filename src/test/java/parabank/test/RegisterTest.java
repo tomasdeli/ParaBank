@@ -122,6 +122,16 @@ public class RegisterTest {
 	        List<String> errors = new ArrayList<>();
 
 	        validateField(data.getFirstName(), "FIRST_NAME", errors);
+	        validateField(data.getLastName(), "LAST_NAME", errors);
+	        validateField(data.getAddress(), "ADDRESS", errors);
+	        validateField(data.getCity(), "CITY", errors);
+	        validateField(data.getState(), "STATE", errors);
+	        validateField(data.getZIPCode(), "ZIP_CODE", errors);
+	        validateField(data.getPhoneNumber(), "PHONE_NUMBER", errors);
+	        validateField(data.getSSN(), "SSN", errors);
+	        validateField(data.getUsername(), "USERNAME", errors);
+	        validateField(data.getPassword(), "PASSWORD", errors);
+	        validateField(data.getPasswordConfirm(), "PASSWORD_CONFIRM", errors);
 
 	        if (!errors.isEmpty()) {
 	            String message = String.join(" ", errors);
