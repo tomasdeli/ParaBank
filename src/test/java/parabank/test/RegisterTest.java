@@ -45,7 +45,7 @@ public class RegisterTest {
 	// Test Pre-Config
 	@BeforeMethod
 	public void configurateTest() throws MalformedURLException {
-		LOGGER.info("\n\n*** INICIANDO CONFIGURACIÓN DE PRUEBA ***");
+		LOGGER.info("\n\n*** INICIANDO CONFIGURACIÓN ***");
 		
 		driver = new Driver();
 		driver.configurate();
@@ -58,7 +58,7 @@ public class RegisterTest {
 		
 		indexPage.navigateToIndexPage();
 		
-		LOGGER.info("\n*** FINALIZANDO CONFIGURACIÓN DE PRUEBA ***\n");
+		LOGGER.info("\n*** FINALIZANDO CONFIGURACIÓN ***\n");
 	}
 	
 	// Tests
@@ -96,14 +96,13 @@ public class RegisterTest {
 			test.pass(Messages.TEST_SUCCESSFULLY.getMessage("REGISTRO - " + data.getTestCase()));
 		} catch (AssertionError e) {
 			LOGGER.error(Messages.TEST_ASSERT_FAILED.getMessage(data.getTestCase()), e);
-			
 	        test.fail(e);
 	        
 	        throw e;
 		} catch (Exception e) {
 			LOGGER.error(Messages.TEST_UNEXPECTED_ERROR.getMessage(data.getTestCase()), e);
-			
 	        test.fail(e);
+	        
 	        throw e;
 		} finally {
 			LOGGER.info(Messages.TEST_FINISH.getMessage("REGISTRO - " + data.getTestCase()));
