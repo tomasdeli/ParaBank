@@ -69,74 +69,50 @@ public class RegisterPage extends BasePage{
 	// Actions
 	public void typeFirstName(String firstName) {
 		type(firstName, firstNameInput, FIRST_NAME_INPUT_NAME);
-		
-		LOGGER.info(Messages.REGISTER_PAGE_FIRST_NAME_COMPLETED.getMessage(firstName));
 	}
 	
 	public void typeLastName(String lastName) {
 		type(lastName, lastNameInput, LAST_NAME_INPUT_NAME);
-		
-		LOGGER.info(Messages.REGISTER_PAGE_LAST_NAME_COMPLETED.getMessage(lastName));
 	}
 	
 	public void typeAddress(String address) {
 		type(address, addressInput, ADDRESS_INPUT_NAME);
-		
-		LOGGER.info(Messages.REGISTER_PAGE_ADDRESS_COMPLETED.getMessage(address));
 	}
 	
 	public void typeCity(String city) {
 		type(city, cityInput, CITY_INPUT_NAME);
-		
-		LOGGER.info(Messages.REGISTER_PAGE_CITY_COMPLETED.getMessage(city));
 	}
 	
 	public void typeState(String state) {
 		type(state, stateInput, STATE_INPUT_NAME);
-		
-		LOGGER.info(Messages.REGISTER_PAGE_STATE_COMPLETED.getMessage(state));
 	}
 	
 	public void typeZIPCode(String ZIPCode) {
 		type(ZIPCode, ZIPCodeInput, ZIP_CODE_INPUT_NAME);
-		
-		LOGGER.info(Messages.REGISTER_PAGE_ZIP_CODE_COMPLETED.getMessage(ZIPCode));
 	}
 	
 	public void typePhoneNumber(String phoneNumber) {
 		type(phoneNumber, ZIPCodeInput, PHONE_NUMBER_INPUT_NAME);
-		
-		LOGGER.info(Messages.REGISTER_PAGE_PHONE_NUMBER_COMPLETED.getMessage(phoneNumber));
 	}
 	
 	public void typeSSN(String SSN) {
 		type(SSN, SSNInput, SSN_INPUT_NAME);
-		
-		LOGGER.info(Messages.REGISTER_PAGE_SSN_COMPLETED.getMessage(SSN));
 	}
 	
 	public void typeUsername(String username) {
 		type(username, usernameInput, USERNAME_INPUT_NAME);
-		
-		LOGGER.info(Messages.REGISTER_PAGE_USERNAME_COMPLETED.getMessage(username));
 	}
 	
 	public void typePassword(String password) {
 		type(password, passwordInput, PASSWORD_INPUT_NAME);
-		
-		LOGGER.info(Messages.REGISTER_PAGE_PASSWORD_COMPLETED.getMessage());
 	}
 	
 	public void typePasswordConfirm(String passwordConfirm) {
 		type(passwordConfirm, passwordConfirmInput, PASSWORD_CONFIRM_INPUT_NAME);
-		
-		LOGGER.info(Messages.REGISTER_PAGE_PASSWORD_CONFIRM_COMPLETED.getMessage());
 	}
 	
 	public void clickRegisterButton() {
 		click(registerButton, REGISTER_BUTTON_NAME);
-		
-		LOGGER.info(Messages.REGISTER_PAGE_REGISTER_BUTTON_CLICKED.getMessage(REGISTER_BUTTON_NAME));
 	}
 	
 	public void register(String firstName, String lastName, String address, String city, String state, String ZIPCode, String phoneNumber, String SSN, String username, String password, String passwordConfirm) {
@@ -152,7 +128,6 @@ public class RegisterPage extends BasePage{
 		type(password, passwordInput, PASSWORD_INPUT_NAME);
 		type(passwordConfirm, passwordConfirmInput, PASSWORD_CONFIRM_INPUT_NAME);
 		click(registerButton, REGISTER_BUTTON_NAME);
-		
 		LOGGER.info(Messages.REGISTER_COMPLETED.getMessage());
 	}
 	

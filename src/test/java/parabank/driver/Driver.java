@@ -36,7 +36,7 @@ public class Driver {
             options.addArguments("--start-maximized");
 		}
 		
-		this.driver = new ChromeDriver(options);
+		driver = new ChromeDriver(options);
 	}
 	
 	// Close Connection
