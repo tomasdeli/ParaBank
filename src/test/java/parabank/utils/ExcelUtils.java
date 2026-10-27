@@ -57,15 +57,21 @@ public class ExcelUtils {
 	public static String getCellData(int rowNum, int colNum) {
 		String cellData = null;
 
-		try {
-			cellData = formatter.formatCellValue(sheet.getRow(rowNum).getCell(colNum));
+	    try {
+	        if (sheet.getRow(rowNum) == null) {
+	            return "";
+	        }
 
-		} catch (Exception e) {
-			System.out.println("Error Message: " + e.getMessage());
-			System.out.println("Error Cause: " + e.getCause());
-			e.printStackTrace();
-		}
+	        cellData = formatter.formatCellValue(
+	            sheet.getRow(rowNum).getCell(colNum)
+	        );
 
-		return cellData;
+	    } catch (Exception e) {
+	        System.out.println("Error Message: " + e.getMessage());
+	        System.out.println("Error Cause: " + e.getCause());
+	        e.printStackTrace();
+	    }
+
+	    return cellData;
 	}
 }

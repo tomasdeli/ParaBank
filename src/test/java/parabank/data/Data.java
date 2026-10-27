@@ -49,20 +49,73 @@ public class Data {
         return rows.toArray(new Object[0][]);
     }
     
+    private Object[][] getRegisterDataById(String testCaseId) {
+        Object[][] excelData = data(
+            BASE_PATH + File.separator + "registerData"
+            + File.separator + "registerData.xlsx",
+            "Data"
+        );
+
+        List<Object[]> registerData = new ArrayList<>();
+        for (Object[] row : excelData) {
+            if (!testCaseId.equalsIgnoreCase((String) row[0])) {
+                continue;
+            }
+            
+            String username = (String) row[9];
+
+            if ("AUTO".equalsIgnoreCase(username)) {
+                username = DataUtils.resolveUsername(username);
+            }
+
+            RegisterData dataCase = new RegisterData(
+                (String) row[0],
+                (String) row[1],
+                (String) row[2],
+                (String) row[3],
+                (String) row[4],
+                (String) row[5],
+                (String) row[6],
+                (String) row[7],
+                (String) row[8],
+                username,
+                (String) row[10],
+                (String) row[11],
+                (String) row[12]
+            );
+
+            registerData.add(new Object[] {dataCase});
+        }
+
+        if (registerData.isEmpty()) {
+            throw new IllegalArgumentException("No se encontraron datos para el caso de prueba: " + testCaseId);
+        }
+
+        return registerData.toArray(new Object[0][]);
+    }
+    
     // Register Cases
     @DataProvider(name = "RegisterData")
     public Object[][] getRegisterData() {
-    	Object[][] excelData = data(BASE_PATH + File.separator + "registerData" + File.separator + "registerData.xlsx", "Data");
-
+        return getRegisterDataById("CP01");
+    }
+    
+    @DataProvider(name = "RegisterExistingUser")
+    public Object[][] getRegisterExistingUser() {
+        return getRegisterDataById("CP02");
+    }
+    
+ // Register Empty Fields Cases
+    @DataProvider(name = "RegisterEmptyFields")
+    public Object[][] getRegisterEmptyFields() {
         List<Object[]> registerData = new ArrayList<>();
 
-        for (Object[] row : excelData) {
-        	
-        	String username = DataUtils.resolveUsername((String) row[9]);
-        	
-            RegisterData dataCase = new RegisterData((String) row[0], (String) row[1], (String) row[2], (String) row[3], (String) row[4], (String) row[5], (String) row[6], (String) row[7], (String) row[8], username, (String) row[10], (String) row[11]);
+        for (int i = 3; i <= 14; i++) {
+            Object[][] testCaseData = getRegisterDataById(String.format("CP%02d", i));
 
-            registerData.add(new Object[] {dataCase});
+            for (Object[] row : testCaseData) {
+                registerData.add(row);
+            }
         }
 
         return registerData.toArray(new Object[0][]);

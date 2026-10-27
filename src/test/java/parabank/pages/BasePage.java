@@ -22,8 +22,9 @@ public class BasePage {
 	protected final WebDriver driver;
 	
 	// Waits
+	// Waits
+	private final Duration shortWaitDuration = Duration.ofSeconds(20);
 	protected final WebDriverWait shortWait;
-	protected final WebDriverWait longWait;
 
 	// Logger
 	private static final Logger LOGGER = LoggerFactory.getLogger(BasePage.class);
@@ -32,8 +33,7 @@ public class BasePage {
 	public BasePage(WebDriver driver) {
 		this.driver = driver;
 		
-		shortWait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		longWait = new WebDriverWait(driver, Duration.ofSeconds(120));
+		shortWait = new WebDriverWait(driver, shortWaitDuration);
 	}
 
 	/*** METHODS ***/
@@ -42,9 +42,9 @@ public class BasePage {
 		try {
 			driver.get(URL);
 			
-			LOGGER.info(Messages.ACCESS_URL_OK.getMessage(URL));
+			LOGGER.info(Messages.ACCESS_URL_OK.getMessage());
 		} catch (Exception e) {
-			String message = Messages.ACCESS_URL_ERROR.getMessage(URL);
+			String message = Messages.ACCESS_URL_ERROR.getMessage();
 			
 			LOGGER.error(message, e);
 			
@@ -78,7 +78,7 @@ public class BasePage {
 			elementClickable.clear();
 			elementClickable.sendKeys(text);
 			
-			LOGGER.info(Messages.TYPE_OK.getMessage(text, name));
+			LOGGER.info(Messages.TYPE_OK.getMessage(name));
 		} catch (AutomationException e) {
 			throw e;
 		} catch (Exception e) {
@@ -189,7 +189,7 @@ public class BasePage {
 		String message;
 		
 	    if (e instanceof TimeoutException) {
-	    	message = Messages.EXPIRATION_ERROR.getMessage(name);	        
+	    	message = Messages.EXPIRATION_ERROR.getMessage(name, shortWaitDuration);	        
 	    } else if (e instanceof NoSuchElementException) {	    	
 	    	message = Messages.NO_SUCH_ELEMENT_ERROR.getMessage(name);
 	    } else {

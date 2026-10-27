@@ -40,6 +40,28 @@ public class RegisterPage extends BasePage{
 	private WebElement welcomeTitle;
 	@FindBy(xpath = "//p[text()='Your account was created successfully. You are now logged in.']")
 	private WebElement registrationSuccessMessage;
+	@FindBy(id = "customer.username.errors")
+	private WebElement existingUserErrorMessage;
+	@FindBy(id = "customer.firstName.errors")
+	private WebElement firstNameRequiredErrorMessage;
+	@FindBy(id = "customer.lastName.errors")
+	private WebElement lastNameRequiredErrorMessage;
+	@FindBy(id = "customer.address.street.errors")
+	private WebElement addressRequiredErrorMessage;
+	@FindBy(id = "customer.address.city.errors")
+	private WebElement cityRequiredErrorMessage;
+	@FindBy(id = "customer.address.state.errors")
+	private WebElement stateRequiredErrorMessage;
+	@FindBy(id = "customer.address.zipCode.errors")
+	private WebElement ZIPCodeRequiredErrorMessage;
+	@FindBy(id = "customer.ssn.errors")
+	private WebElement SSNRequiredErrorMessage;
+	@FindBy(id = "customer.username.errors")
+	private WebElement usernameRequiredErrorMessage;
+	@FindBy(id = "customer.password.errors")
+	private WebElement passwordRequiredErrorMessage;
+	@FindBy(id = "repeatedPassword.errors")
+	private WebElement passwordConfirmRequiredErrorMessage;
 	
 	private static final String FIRST_NAME_INPUT_NAME = "First Name Input";
 	private static final String LAST_NAME_INPUT_NAME = "Last Name Input";
@@ -55,6 +77,17 @@ public class RegisterPage extends BasePage{
 	private static final String REGISTER_BUTTON_NAME = "Register Button";
 	private static final String WELCOME_TITLE_NAME = "Welcome Title";
 	private static final String REGISTRATION_SUCCESS_MESSAGE_NAME = "Registration Success Message";
+	private static final String EXISTING_USER_ERROR_MESSAGE_NAME = "Existing User Error Message";
+	private static final String FIRST_NAME_REQUIRED_ERROR_MESSAGE_NAME = "First Name Required Error Message";
+	private static final String LAST_NAME_REQUIRED_ERROR_MESSAGE_NAME = "Last Name Required Error Message";
+	private static final String ADDRESS_REQUIRED_ERROR_MESSAGE_NAME = "Address Required Error Message";
+	private static final String CITY_REQUIRED_ERROR_MESSAGE_NAME = "City Required Error Message";
+	private static final String STATE_REQUIRED_ERROR_MESSAGE_NAME = "State Required Error Message";
+	private static final String ZIP_CODE_REQUIRED_ERROR_MESSAGE_NAME = "Zip Code Required Error Message";
+	private static final String SSN_REQUIRED_ERROR_MESSAGE_NAME = "SSN Required Error Message";
+	private static final String USERNAME_REQUIRED_ERROR_MESSAGE_NAME = "Username Required Error Message";
+	private static final String PASSWORD_REQUIRED_ERROR_MESSAGE_NAME = "Password Required Error Message";
+	private static final String PASSWORD_CONFIRM_REQUIRED_ERROR_MESSAGE_NAME = "Password Confirm Required Error Message";
 	
 	// Logger
 	private static final Logger LOGGER = LoggerFactory.getLogger(RegisterPage.class);
@@ -144,6 +177,63 @@ public class RegisterPage extends BasePage{
 		return text;
 	}
 	
+	public String getExistingUserErrorMessageText() {
+		String text = getText(existingUserErrorMessage, EXISTING_USER_ERROR_MESSAGE_NAME);
+		
+		return text;
+	}
+	
+	public String getFirstNameRequiredErrorMessageText() {
+		String text = getText(firstNameRequiredErrorMessage, FIRST_NAME_REQUIRED_ERROR_MESSAGE_NAME);
+		
+		return text;
+	}
+	
+	public String getLastNameRequiredErrorMessageText() {
+	    String text = getText(lastNameRequiredErrorMessage, LAST_NAME_REQUIRED_ERROR_MESSAGE_NAME);
+	    return text;
+	}
+
+	public String getAddressRequiredErrorMessageText() {
+	    String text = getText(addressRequiredErrorMessage, ADDRESS_REQUIRED_ERROR_MESSAGE_NAME);
+	    return text;
+	}
+
+	public String getCityRequiredErrorMessageText() {
+	    String text = getText(cityRequiredErrorMessage, CITY_REQUIRED_ERROR_MESSAGE_NAME);
+	    return text;
+	}
+
+	public String getStateRequiredErrorMessageText() {
+	    String text = getText(stateRequiredErrorMessage, STATE_REQUIRED_ERROR_MESSAGE_NAME);
+	    return text;
+	}
+
+	public String getZIPCodeRequiredErrorMessageText() {
+	    String text = getText(ZIPCodeRequiredErrorMessage, ZIP_CODE_REQUIRED_ERROR_MESSAGE_NAME);
+	    return text;
+	}
+
+	public String getSSNRequiredErrorMessageText() {
+	    String text = getText(SSNRequiredErrorMessage, SSN_REQUIRED_ERROR_MESSAGE_NAME);
+	    return text;
+	}
+
+	public String getUsernameRequiredErrorMessageText() {
+	    String text = getText(usernameRequiredErrorMessage, USERNAME_REQUIRED_ERROR_MESSAGE_NAME);
+	    return text;
+	}
+
+	public String getPasswordRequiredErrorMessageText() {
+	    String text = getText(passwordRequiredErrorMessage, PASSWORD_REQUIRED_ERROR_MESSAGE_NAME);
+	    return text;
+	}
+
+	public String getPasswordConfirmRequiredErrorMessageText() {
+	    String text = getText(passwordConfirmRequiredErrorMessage, PASSWORD_CONFIRM_REQUIRED_ERROR_MESSAGE_NAME);
+	    return text;
+	}
+	
 	// Validate
 	public boolean isWelcomeTitleVisible() {		
 		try {
@@ -161,5 +251,104 @@ public class RegisterPage extends BasePage{
 		} catch (AutomationException e) {
 			return false;
 		}
+	}
+	
+	public boolean isExistingUserErrorMessageVisible() {		
+		try {
+			elementVisible(existingUserErrorMessage, EXISTING_USER_ERROR_MESSAGE_NAME);
+	        return true;
+		} catch (AutomationException e) {
+			return false;
+		}
+	}
+	
+	public boolean isFirstNameRequiredErrorMessageVisible() {		
+		try {
+			elementVisible(firstNameRequiredErrorMessage, FIRST_NAME_REQUIRED_ERROR_MESSAGE_NAME);
+	        return true;
+		} catch (AutomationException e) {
+			return false;
+		}
+	}
+	
+	public boolean isLastNameRequiredErrorMessageVisible() {
+	    try {
+	        elementVisible(lastNameRequiredErrorMessage, LAST_NAME_REQUIRED_ERROR_MESSAGE_NAME);
+	        return true;
+	    } catch (AutomationException e) {
+	        return false;
+	    }
+	}
+
+	public boolean isAddressRequiredErrorMessageVisible() {
+	    try {
+	        elementVisible(addressRequiredErrorMessage, ADDRESS_REQUIRED_ERROR_MESSAGE_NAME);
+	        return true;
+	    } catch (AutomationException e) {
+	        return false;
+	    }
+	}
+
+	public boolean isCityRequiredErrorMessageVisible() {
+	    try {
+	        elementVisible(cityRequiredErrorMessage, CITY_REQUIRED_ERROR_MESSAGE_NAME);
+	        return true;
+	    } catch (AutomationException e) {
+	        return false;
+	    }
+	}
+
+	public boolean isStateRequiredErrorMessageVisible() {
+	    try {
+	        elementVisible(stateRequiredErrorMessage, STATE_REQUIRED_ERROR_MESSAGE_NAME);
+	        return true;
+	    } catch (AutomationException e) {
+	        return false;
+	    }
+	}
+
+	public boolean isZIPCodeRequiredErrorMessageVisible() {
+	    try {
+	        elementVisible(ZIPCodeRequiredErrorMessage, ZIP_CODE_REQUIRED_ERROR_MESSAGE_NAME);
+	        return true;
+	    } catch (AutomationException e) {
+	        return false;
+	    }
+	}
+
+	public boolean isSSNRequiredErrorMessageVisible() {
+	    try {
+	        elementVisible(SSNRequiredErrorMessage, SSN_REQUIRED_ERROR_MESSAGE_NAME);
+	        return true;
+	    } catch (AutomationException e) {
+	        return false;
+	    }
+	}
+
+	public boolean isUsernameRequiredErrorMessageVisible() {
+	    try {
+	        elementVisible(usernameRequiredErrorMessage, USERNAME_REQUIRED_ERROR_MESSAGE_NAME);
+	        return true;
+	    } catch (AutomationException e) {
+	        return false;
+	    }
+	}
+
+	public boolean isPasswordRequiredErrorMessageVisible() {
+	    try {
+	        elementVisible(passwordRequiredErrorMessage, PASSWORD_REQUIRED_ERROR_MESSAGE_NAME);
+	        return true;
+	    } catch (AutomationException e) {
+	        return false;
+	    }
+	}
+
+	public boolean isPasswordConfirmRequiredErrorMessageVisible() {
+	    try {
+	        elementVisible(passwordConfirmRequiredErrorMessage, PASSWORD_CONFIRM_REQUIRED_ERROR_MESSAGE_NAME);
+	        return true;
+	    } catch (AutomationException e) {
+	        return false;
+	    }
 	}
 }

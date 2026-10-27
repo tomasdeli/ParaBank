@@ -14,9 +14,10 @@ public class RegisterData {
     private String username;
     private String password;
     private String passwordConfirm;
+    private String expectedMessage;
 
     /*** CONSTRUCTOR ***/
-    public RegisterData(String testCase, String firstName, String lastName, String address, String city, String state, String ZIPCode, String phoneNumber, String SSN, String username, String password, String passwordConfirm) {
+    public RegisterData(String testCase, String firstName, String lastName, String address, String city, String state, String ZIPCode, String phoneNumber, String SSN, String username, String password, String passwordConfirm, String expectedMessage) {
         this.testCase = testCase;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,6 +30,7 @@ public class RegisterData {
         this.username = username;
         this.password = password;
         this.passwordConfirm = passwordConfirm;
+        this.expectedMessage = expectedMessage;
     }
     
     /*** GETTER ***/
@@ -78,5 +80,9 @@ public class RegisterData {
     
     public String getPasswordConfirm() {
         return passwordConfirm;
+    }
+    
+    public String getExpectedMessage() {
+    	return expectedMessage;
     }
 }
