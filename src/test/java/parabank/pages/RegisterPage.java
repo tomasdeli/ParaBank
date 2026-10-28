@@ -36,10 +36,6 @@ public class RegisterPage extends BasePage{
 	private WebElement passwordConfirmInput;
 	@FindBy(xpath = "//input[@value='Register']")
 	private WebElement registerButton;
-	@FindBy(className = "title")
-	private WebElement welcomeTitle;
-	@FindBy(xpath = "//p[text()='Your account was created successfully. You are now logged in.']")
-	private WebElement registrationSuccessMessage;
 	@FindBy(id = "customer.username.errors")
 	private WebElement existingUserErrorMessage;
 	@FindBy(id = "customer.firstName.errors")
@@ -62,6 +58,8 @@ public class RegisterPage extends BasePage{
 	private WebElement passwordRequiredErrorMessage;
 	@FindBy(id = "repeatedPassword.errors")
 	private WebElement passwordConfirmRequiredErrorMessage;
+	@FindBy(id = "repeatedPassword.errors")
+	private WebElement passwordMismatchErrorMessage;
 	
 	private static final String FIRST_NAME_INPUT_NAME = "First Name Input";
 	private static final String LAST_NAME_INPUT_NAME = "Last Name Input";
@@ -75,8 +73,6 @@ public class RegisterPage extends BasePage{
 	private static final String PASSWORD_INPUT_NAME = "Password Input";
 	private static final String PASSWORD_CONFIRM_INPUT_NAME = "Password Confirm Input";
 	private static final String REGISTER_BUTTON_NAME = "Register Button";
-	private static final String WELCOME_TITLE_NAME = "Welcome Title";
-	private static final String REGISTRATION_SUCCESS_MESSAGE_NAME = "Registration Success Message";
 	private static final String EXISTING_USER_ERROR_MESSAGE_NAME = "Existing User Error Message";
 	private static final String FIRST_NAME_REQUIRED_ERROR_MESSAGE_NAME = "First Name Required Error Message";
 	private static final String LAST_NAME_REQUIRED_ERROR_MESSAGE_NAME = "Last Name Required Error Message";
@@ -88,6 +84,7 @@ public class RegisterPage extends BasePage{
 	private static final String USERNAME_REQUIRED_ERROR_MESSAGE_NAME = "Username Required Error Message";
 	private static final String PASSWORD_REQUIRED_ERROR_MESSAGE_NAME = "Password Required Error Message";
 	private static final String PASSWORD_CONFIRM_REQUIRED_ERROR_MESSAGE_NAME = "Password Confirm Required Error Message";
+	private static final String PASSWORD_MISMATCH_ERROR_MESSAGE_NAME = "Password Mismatch Error Message";
 	
 	// Logger
 	private static final Logger LOGGER = LoggerFactory.getLogger(RegisterPage.class);
@@ -165,18 +162,6 @@ public class RegisterPage extends BasePage{
 	}
 	
 	// Getter
-	public String getWelcomeTitleText() {
-		String text = getText(welcomeTitle, WELCOME_TITLE_NAME);
-		
-		return text;
-	}
-	
-	public String getRegistrationSuccessMessageText() {
-		String text = getText(registrationSuccessMessage, REGISTRATION_SUCCESS_MESSAGE_NAME);
-		
-		return text;
-	}
-	
 	public String getExistingUserErrorMessageText() {
 		String text = getText(existingUserErrorMessage, EXISTING_USER_ERROR_MESSAGE_NAME);
 		
@@ -234,25 +219,12 @@ public class RegisterPage extends BasePage{
 	    return text;
 	}
 	
-	// Validate
-	public boolean isWelcomeTitleVisible() {		
-		try {
-			elementVisible(welcomeTitle, WELCOME_TITLE_NAME);
-	        return true;
-		} catch (AutomationException e) {
-			return false;
-		}
+	public String getPasswordsMismatchErrorMessageText() {
+	    String text = getText(passwordMismatchErrorMessage, PASSWORD_MISMATCH_ERROR_MESSAGE_NAME);
+	    return text;
 	}
 	
-	public boolean isRegistrationSuccessMessageVisible() {
-		try {
-			elementVisible(registrationSuccessMessage, REGISTRATION_SUCCESS_MESSAGE_NAME);
-			return true;
-		} catch (AutomationException e) {
-			return false;
-		}
-	}
-	
+	// Validate	
 	public boolean isExistingUserErrorMessageVisible() {		
 		try {
 			elementVisible(existingUserErrorMessage, EXISTING_USER_ERROR_MESSAGE_NAME);
@@ -346,6 +318,15 @@ public class RegisterPage extends BasePage{
 	public boolean isPasswordConfirmRequiredErrorMessageVisible() {
 	    try {
 	        elementVisible(passwordConfirmRequiredErrorMessage, PASSWORD_CONFIRM_REQUIRED_ERROR_MESSAGE_NAME);
+	        return true;
+	    } catch (AutomationException e) {
+	        return false;
+	    }
+	}
+	
+	public boolean isPasswordsMismatchErrorMessageVisible() {
+	    try {
+	        elementVisible(passwordMismatchErrorMessage, PASSWORD_MISMATCH_ERROR_MESSAGE_NAME);
 	        return true;
 	    } catch (AutomationException e) {
 	        return false;

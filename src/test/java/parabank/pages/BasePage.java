@@ -44,7 +44,7 @@ public class BasePage {
 			
 			LOGGER.info(Messages.ACCESS_URL_OK.getMessage());
 		} catch (Exception e) {
-			String message = Messages.ACCESS_URL_ERROR.getMessage();
+			String message = Messages.ACCESS_URL_ERROR.getMessage(URL);
 			
 			LOGGER.error(message, e);
 			
