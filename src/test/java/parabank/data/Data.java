@@ -16,33 +16,37 @@ public class Data {
     /*** METHODS ***/
     // Read Excel
     public Object[][] data(String path, String sheet) {
-        new ExcelUtils(path, sheet);
+    	List<Object[]> rows = new ArrayList<>();
 
-        int row_count = ExcelUtils.getRowCount();
-        int col_count = ExcelUtils.getColCount();
+    	try (ExcelUtils excel = new ExcelUtils(path, sheet)) {
 
-        List<Object[]> rows = new ArrayList<>();
-        
-        for (int i = 1; i < row_count; i++) {
-        	boolean rowIsEmpty = true;
-        	Object[] dt = new Object[col_count];
-        	
-            for (int j = 0; j < col_count; j++) {
-                String cellData = ExcelUtils.getCellData(i, j);
-                
-                if (cellData != null && !cellData.trim().isEmpty()) {
-                	rowIsEmpty = false;
-                }
-                
-                dt[j] = cellData;
-            }
-            
-            if (!rowIsEmpty) {
-            	rows.add(dt);
-            }
-        }
-        
-        return rows.toArray(new Object[0][]);
+    		int rowCount = excel.getRowCount();
+    		int colCount = excel.getColCount();
+
+    		for (int i = 1; i < rowCount; i++) {
+    			boolean rowIsEmpty = true;
+    			Object[] dt = new Object[colCount];
+
+    			for (int j = 0; j < colCount; j++) {
+    				String cellData = excel.getCellData(i, j);
+
+    				if (cellData != null && !cellData.trim().isEmpty()) {
+    					rowIsEmpty = false;
+    				}
+
+    				dt[j] = cellData;
+    			}
+
+    			if (!rowIsEmpty) {
+    				rows.add(dt);
+    			}
+    		}
+
+    	} catch (Exception e) {
+    		throw new RuntimeException("Error al leer el archivo Excel: " + path, e);
+    	}
+
+    	return rows.toArray(new Object[0][]);
     }
     
     private Object[][] getRegisterDataById(String testCaseId) {

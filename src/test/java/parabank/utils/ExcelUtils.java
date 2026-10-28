@@ -1,77 +1,63 @@
+
 package parabank.utils;
+
+import java.io.IOException;
 
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ExcelUtils {
-	/*** VARIABLES ***/
-	private static XSSFWorkbook workbook;
-	private static XSSFSheet sheet;
-	private static DataFormatter formatter = new DataFormatter();
+public class ExcelUtils implements AutoCloseable {
 
-	/*** METHODS ***/
-	// Excel configuration
-	public ExcelUtils(String path, String sheet) {
-		try {
-			workbook = new XSSFWorkbook(path);
+    /*** VARIABLES ***/
+    private XSSFWorkbook workbook;
+    private XSSFSheet sheet;
+    private final DataFormatter formatter = new DataFormatter();
 
-			ExcelUtils.sheet = workbook.getSheet(sheet);
-		} catch (Exception e) {
-			System.out.println("Error Message: " + e.getMessage());
-			System.out.println("Error Cause: " + e.getCause());
-			e.printStackTrace();
-		}
-	}
+    /*** CONSTRUCTOR ***/
+    public ExcelUtils(String path, String sheetName) {
+        try {
+            workbook = new XSSFWorkbook(path);
+            sheet = workbook.getSheet(sheetName);
 
-	public static int getRowCount() {
-		int rowCount = 0;
+            if (sheet == null) {
+                throw new IllegalArgumentException("No existe la hoja de Excel: " + sheetName);
+            }
 
-		try {
-			rowCount = sheet.getPhysicalNumberOfRows();
-		} catch (Exception e) {
-			System.out.println("Error Message: " + e.getMessage());
-			System.out.println("Error Cause: " + e.getCause());
-			e.printStackTrace();
-		}
+        } catch (Exception e) {
+            throw new RuntimeException("Error al abrir el archivo Excel: " + path, e);
+        }
+    }
 
-		return rowCount;
-	}
+    /*** METHODS ***/
+    public int getRowCount() {
+        return sheet.getPhysicalNumberOfRows();
+    }
 
-	// Getter
-	public static int getColCount() {
-		int colCount = 0;
+    public int getColCount() {
+        if (sheet.getRow(0) == null) {
+            return 0;
+        }
 
-		try {
-			colCount = sheet.getRow(0).getPhysicalNumberOfCells();
-			
-		} catch (Exception e) {
-			System.out.println("Error Message: " + e.getMessage());
-			System.out.println("Error Cause: " + e.getCause());
-			e.printStackTrace();
-		}
+        return sheet.getRow(0).getPhysicalNumberOfCells();
+    }
 
-		return colCount;
-	}
+    public String getCellData(int rowNum, int colNum) {
+        if (sheet.getRow(rowNum) == null || sheet.getRow(rowNum).getCell(colNum) == null) {
+            return "";
+        }
 
-	public static String getCellData(int rowNum, int colNum) {
-		String cellData = null;
+        return formatter.formatCellValue(
+            sheet.getRow(rowNum).getCell(colNum)
+        );
+    }
 
-	    try {
-	        if (sheet.getRow(rowNum) == null) {
-	            return "";
-	        }
-
-	        cellData = formatter.formatCellValue(
-	            sheet.getRow(rowNum).getCell(colNum)
-	        );
-
-	    } catch (Exception e) {
-	        System.out.println("Error Message: " + e.getMessage());
-	        System.out.println("Error Cause: " + e.getCause());
-	        e.printStackTrace();
-	    }
-
-	    return cellData;
-	}
+    @Override
+    public void close() throws IOException {
+        if (workbook != null) {
+            workbook.close();
+            workbook = null;
+            sheet = null;
+        }
+    }
 }
