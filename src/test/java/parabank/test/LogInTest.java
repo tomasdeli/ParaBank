@@ -20,8 +20,8 @@ public class LogInTest extends BaseTest {
     // Tests
     @Test(dataProvider = "LogIn", dataProviderClass = Data.class, priority = 1)
     public void logInTest(LogInData data) {
-        String testCase = "LOGIN - " + data.getTestCase();
-        ExtentTest test = report.createTest("Login Test - " + data.getTestCase());
+        String testCase = data.getTestCase() + " - LOGIN";
+        ExtentTest test = report.createTest(data.getTestCase() + " - Login");
 
         try {
             LOGGER.info(Messages.TEST_START.getMessage(testCase));
@@ -72,8 +72,8 @@ public class LogInTest extends BaseTest {
 
     @Test(dataProvider = "LogInInvalidUsernameOrPassword", dataProviderClass = Data.class, priority = 2)
     public void logInInvalidUsernameOrPasswordTest(LogInData data) {
-        String testCase = "LOGIN - USUARIO O CONTRASEÑA INVÁLIDOS - " + data.getTestCase();
-        ExtentTest test = report.createTest("Login Test - Invalid Username Or Password - " + data.getTestCase());
+        String testCase = data.getTestCase() + " - LOGIN - USUARIO O CONTRASEÑA INVÁLIDOS";
+        ExtentTest test = report.createTest(data.getTestCase() + " - Login - Invalid Username Or Password");
 
         try {
             LOGGER.info(Messages.TEST_START.getMessage(testCase));
@@ -113,8 +113,8 @@ public class LogInTest extends BaseTest {
 
     @Test(dataProvider = "LogInEmptyFields", dataProviderClass = Data.class, priority = 3)
     public void logInEmptyFieldsTest(LogInData data) {
-        String testCase = "LOGIN - CAMPOS VACÍOS - " + data.getTestCase();
-        ExtentTest test = report.createTest("Login Test - Empty Fields - " + data.getTestCase());
+        String testCase = data.getTestCase() + " - LOGIN - CAMPOS VACÍOS";
+        ExtentTest test = report.createTest(data.getTestCase() + " - Login - Empty Fields");
 
         try {
             LOGGER.info(Messages.TEST_START.getMessage(testCase));

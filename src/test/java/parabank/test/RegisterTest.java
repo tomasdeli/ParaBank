@@ -19,8 +19,8 @@ public class RegisterTest extends BaseTest {
     // Tests
     @Test(dataProvider = "Register", dataProviderClass = Data.class, priority = 1)
     public void registerTest(RegisterData data) {
-        String testCase = "REGISTRO - " + data.getTestCase();
-        ExtentTest test = report.createTest("Register Test - " + data.getTestCase());
+        String testCase = data.getTestCase() + " - REGISTRO";
+        ExtentTest test = report.createTest(data.getTestCase() + " - Register");
 
         try {
             LOGGER.info(Messages.TEST_START.getMessage(testCase));
@@ -67,8 +67,8 @@ public class RegisterTest extends BaseTest {
 
     @Test(dataProvider = "RegisterExistingUser", dataProviderClass = Data.class, priority = 2)
     public void registerTestExistingUserTest(RegisterData data) {
-        String testCase = "REGISTRO - USUARIO EXISTENTE - " + data.getTestCase();
-        ExtentTest test = report.createTest("Register Test - Existing User - " + data.getTestCase());
+        String testCase = data.getTestCase() + " - REGISTRO - USUARIO EXISTENTE";
+        ExtentTest test = report.createTest(data.getTestCase() + " - Register - Existing User");
 
         try {
             LOGGER.info(Messages.TEST_START.getMessage(testCase));
@@ -110,8 +110,8 @@ public class RegisterTest extends BaseTest {
 
     @Test(dataProvider = "RegisterEmptyFields", dataProviderClass = Data.class, priority = 3)
     public void registerTestEmptyFieldsTest(RegisterData data) {
-        String testCase = "REGISTRO - CAMPOS VACÍOS - " + data.getTestCase();
-        ExtentTest test = report.createTest("Register Test - Empty Fields - " + data.getTestCase());
+        String testCase = data.getTestCase() + " - REGISTRO - CAMPOS VACÍOS";
+        ExtentTest test = report.createTest(data.getTestCase() + " - Register - Empty Fields");
 
         try {
             LOGGER.info(Messages.TEST_START.getMessage(testCase));
@@ -155,8 +155,8 @@ public class RegisterTest extends BaseTest {
     
     @Test(dataProvider = "RegisterPasswordsMismatch", dataProviderClass = Data.class, priority = 4)
     public void registerPasswordsMismatchTest(RegisterData data) {
-        String testCase = "REGISTRO - CONTRASEÑAS DIFERENTES - " + data.getTestCase();
-        ExtentTest test = report.createTest("Register Test - Passwords Mismatch - " + data.getTestCase());
+        String testCase = data.getTestCase() + " - REGISTRO - CONTRASEÑAS DIFERENTES";
+        ExtentTest test = report.createTest(data.getTestCase() + " - Register - Passwords Mismatch");
 
         try {
             LOGGER.info(Messages.TEST_START.getMessage(testCase));
